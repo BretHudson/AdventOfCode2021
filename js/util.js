@@ -34,6 +34,10 @@ const _permutations = xs => {
     }, [[]]);
 };
 
+const _partition = (xs, predicate) => {
+	return xs.reduce(([a, b], i) => predicate(i) ? [[...a, i], [...b]] : [[...a], [...b, i]], [[], []]);
+};
+
 // Prototypes
 Array.prototype.combinations = function(n) {
 	if (n === undefined) return this.slice();
@@ -43,6 +47,10 @@ Array.prototype.combinations = function(n) {
 Array.prototype.permutations = function() {
 	return _permutations(this);
 };
+
+Array.prototype.partition = function(predicate) {
+	return _partition(this, predicate);
+}
 
 Math.clamp = (v, min, max) => {
 	return Math.min(Math.max(v, min), max);
